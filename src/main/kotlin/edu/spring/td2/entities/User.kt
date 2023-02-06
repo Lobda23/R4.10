@@ -1,15 +1,9 @@
 package edu.spring.td2.entities
 
-import jakarta.persistence.Column
-import jakarta.persistence.Entity
-import jakarta.persistence.GeneratedValue
-import jakarta.persistence.GenerationType
-import jakarta.persistence.Table
-import org.springframework.data.annotation.Id
+import jakarta.persistence.*
 
 @Entity
-@Table(name = "user")
-open class User_ {
+open class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     open var id:Int?=null
@@ -28,5 +22,12 @@ open class User_ {
 
     open var suspended:Boolean=false
 
+    @ManyToOne
+    @JoinColumn(name="idOrganization", nullable = false)
+    open lateinit var organization:Organization
+
+    @ManyToMany()
+    @JoinTable(name="user_groups")
+    open val groups = mutableSetOf<Group>()
 
 }
