@@ -1,0 +1,33 @@
+{{> main/header }}
+<h1>Messagerie</h1>
+<div class="ui container segment">
+    <h2 class="left attached column">Organisations</h2>
+    <table class="ui table">
+        <thead>
+        <tr>
+            <th>Nom</th>
+            <th>Domaine</th>
+            <th>Effectifs</th>
+            <th class="center aligned">Users</th>
+        </tr>
+        </thead>
+        <tbody>
+        {{#orga}}
+            <tr>
+                <td>{{name}}</td>
+                <td>{{domain}}</td>
+                <td>
+                    <span class="ui label"><i class="user icon"></i> {{users.size}}</span>
+                    <span class="ui label"><i class="users icon"></i> {{groups.size}}</span>
+                </td>
+                <td class="center aligned">
+                    {{#users}}
+                        {{name}}
+                    {{/users}}
+                </td>
+            </tr>
+        {{/orga}}
+        </tbody>
+    </table>
+</div>
+{{> main/footer }}

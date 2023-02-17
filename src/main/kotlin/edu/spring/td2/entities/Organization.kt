@@ -21,7 +21,7 @@ class Organization {
     open val users = mutableSetOf<User>()
 
     @OneToMany(mappedBy = "organization", fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
-    open val groups= mutableSetOf<User>()
+    open val groups= mutableSetOf<Group>()
 
     fun addUser(user: User):Boolean {
         if (users.add(user)){

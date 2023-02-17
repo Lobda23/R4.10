@@ -1,0 +1,26 @@
+{{> main/header }}
+<h1>Messagerie</h1>
+<h2>Organisations</h2>
+{{#orga}}
+<form method="post" action="/orgas/edit/{{id}}" class="ui form">
+  <div class="two fields">
+    <div class="field">
+      NOM :<input type="text" name="name" placeholder="Nom" value="{{name}}">
+    </div>
+    <div class="field">
+      DOMAINE :<input type="text" name="domain" placeholder="Domaine" value="{{domain}}">
+    </div>
+  </div>
+  <div class="field">
+    ALIAS :<input type="text" name="aliases" placeholder="Aliases" value="{{aliases}}">
+  </div>
+  <hr>
+    UTILISATEUR(S) :
+  <textarea name="users" placeholder="Utilisateurs"></textarea>
+  <br><br>
+  <button type="submit" class="ui teal right floated button">
+    Valider
+  </button>
+</form>
+{{/orga}}
+{{> main/footer }}
