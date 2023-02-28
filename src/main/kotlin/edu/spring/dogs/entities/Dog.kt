@@ -10,10 +10,10 @@ open class Dog(){
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    open var id:Int = 0
+    open var id:Int?=null
 
     @ManyToOne
-    @JoinColumn(name="idMaster", nullable = false)
+    @JoinColumn(name="idMaster")
     open var master: Master? = null
 
     @ManyToMany

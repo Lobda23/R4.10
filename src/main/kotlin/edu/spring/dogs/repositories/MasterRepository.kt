@@ -9,6 +9,6 @@ import org.springframework.stereotype.Repository
 interface MasterRepository: CrudRepository<Master, Int> {
 
     fun findByDogsName(s: String): List<Master>
-    fun findByfirstNameAndlastName(s:String, s1:String): Master?
+    fun findByFirstnameAndLastname(s:String, s1:String): Master?
 
 }

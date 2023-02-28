@@ -66,3 +66,4 @@ class DogRepositoryTest {
         assert(dog.master==master)
     }
 }
+

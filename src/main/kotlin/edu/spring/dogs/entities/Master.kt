@@ -6,20 +6,20 @@ import jakarta.persistence.*
 open class Master() {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    open var id: Int = 0
+    open var id: Int=0
 
     @Column(length = 30)
-    open var firstName:String? = null
+    open var firstname:String? = null
 
     @Column(length = 30)
-    open var lastName:String? = null
+    open var lastname:String? = null
 
-    @OneToMany(mappedBy = "master", fetch = FetchType.EAGER, cascade = [CascadeType.ALL])
+    @OneToMany(mappedBy = "master", fetch = FetchType.EAGER, cascade = [CascadeType.DETACH , CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH])
     open val dogs= mutableSetOf<Dog>()
 
-    constructor(firstName: String?, lastName: String?): this(){
-        this.firstName = firstName
-        this.lastName = lastName
+    constructor(firstname: String?, lastname: String?): this(){
+        this.firstname = firstname
+        this.lastname = lastname
     }
 
 
