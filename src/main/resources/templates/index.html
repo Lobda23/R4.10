@@ -1,0 +1,47 @@
+{{> main/header }}
+<h1>Propriétaire <label class="ui blue left pointing label count-masters">{{masters.size}}</label></h1>
+
+
+<div class="ui attached blue message">
+    <i class="info icon"></i>
+    <p>Ajout rapide de propriétaire</p>
+</div>
+<form class="ui form attached fluid segment" method="post" action="/master/add">
+    <div class="two fields">
+        <div class="field">
+            <input placeholder="First Name" type="text" name="firstname">
+        </div>
+        <div class="field">
+            <input placeholder="Last Name" type="text" name="lastname">
+        </div>
+        <button class="ui right icon button">
+            <i class="add icon"></i>
+        </button>
+    </div>
+</form>
+
+{{#masters}}
+    <table class="ui table">
+        <thead>
+        <tr>
+            <th>Propriétaire</th>
+            <th>Actions</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td data-label="Propriétaire">{{firstname}} {{lastname}}
+                <div class="ui label">
+                    <i class="dog icon"></i> {{dogs.size}}
+                </div>
+            </td>
+            <td data-label="Actions"></td>
+            <td></td>
+        </tr>
+    </table>
+{{/masters}}
+
+
+
+{{> main/footer }}
