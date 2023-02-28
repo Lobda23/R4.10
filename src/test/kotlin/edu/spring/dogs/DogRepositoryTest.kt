@@ -4,7 +4,6 @@ import edu.spring.dogs.entities.Dog
 import edu.spring.dogs.entities.Master
 import edu.spring.dogs.repositories.DogRepository
 import edu.spring.dogs.repositories.MasterRepository
-import org.hibernate.TransientPropertyValueException
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import org.springframework.beans.factory.annotation.Autowired
