@@ -49,9 +49,12 @@
             </td>
         </tr>
     {{/masters}}
+    {{^masters}}
+        <p>Il n'y a pas de maître dans la base de données.</p>
+    {{/masters}}
 </table>
 
-<h1>Chiens à l'adoption <label class="ui red left pointing label count-masters">{{dogs.size}}</label></h1>
+<h1>Chiens à l'adoption <label class="ui red left pointing label count-dogs">{{dogs.size}}</label></h1>
 
 <table class="ui table">
     <thead>
@@ -66,19 +69,25 @@
             <td data-label="Actions">
                 <form style="display:inline" method="post" action="/dog/{{#id}}{{.}}{{/id}}/action">
                     <div class="ui action input">
-                        <select class="ui search dropdown">
+                        <select class="ui search dropdown" name="master">
                             {{#masters}}
-                            <option value="{{id}}">{{firstname}} {{lastname}}</option>
+                            <option value="{{id}}" >{{firstname}} {{lastname}}</option>
                             {{/masters}}
                         </select>
+                        <button class="ui right icon button" value="adopt" name="dog-action">
+                            <i class="add icon"></i>
+                        </button>
                     </div>
 
-                    <button class="ui red icon button" value="adopt" name="dog-action">
+                    <button class="ui red icon button" value="remove" name="dog-action">
                         <i class="sign out alternate icon"></i>
                     </button>
                 </form>
             </td>
         </tr>
+    {{/dogs}}
+    {{^dogs}}
+        <p>Il n'y a pas de chien à l'adoption dans la base de données.</p>
     {{/dogs}}
 </table>
 

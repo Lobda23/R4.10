@@ -7,6 +7,7 @@ import edu.spring.dogs.repositories.MasterRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Controller
 import org.springframework.ui.ModelMap
+import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.ModelAttribute
 import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
@@ -54,19 +55,23 @@ class MainController {
         return RedirectView("/")
     }
 
+    @GetMapping("/master/{id}/delete")
+    fun kill(@PathVariable id: Int):RedirectView{
+        masterRepository.deleteById(id)
+        return RedirectView("/")
+    }
+
     @PostMapping("/dog/{id}/action")
-    fun addNewMaster(@ModelAttribute("") nom: String, @ModelAttribute("dog-action") button :String, @PathVariable id: Int) : RedirectView {
-        if (button == "add") {
-            var dog = dogRepository.save(Dog(nom))
-            var master = masterRepository.findById(id).get()
+    fun addNewMaster(@ModelAttribute("master") idMaster: Int, @ModelAttribute("dog-action") button :String, @PathVariable id: Int) : RedirectView {
+        if (button == "adopt") {
+            var dog = dogRepository.findById(id).get()
+            var master = masterRepository.findById(idMaster).get()
             master.addDog(dog)
             dogRepository.save(dog)
+            masterRepository.save(master)
         }
-        if (button == "giveup"){
-            var master = masterRepository.findById(id).get()
-            var dog = dogRepository.findByNameAndMasterId(nom, id)
-            master.giveUpDog(dog)
-            dogRepository.save(dog)
+        if (button == "remove"){
+            dogRepository.deleteById(id)
         }
         return RedirectView("/")
     }
