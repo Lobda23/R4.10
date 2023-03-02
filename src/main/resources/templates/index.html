@@ -2,45 +2,85 @@
 <h1>Propriétaire <label class="ui blue left pointing label count-masters">{{masters.size}}</label></h1>
 
 
-<div class="ui attached blue message">
-    <i class="info icon"></i>
-    <p>Ajout rapide de propriétaire</p>
+<div class="ui attached message info">
+    <i class="info blue icon"></i>
+    Ajout rapide de propriétaire
 </div>
-<form class="ui form attached fluid segment" method="post" action="/master/add">
-    <div class="two fields">
-        <div class="field">
-            <input placeholder="First Name" type="text" name="firstname">
-        </div>
-        <div class="field">
-            <input placeholder="Last Name" type="text" name="lastname">
-        </div>
+<form class="ui segment attached" method="post" action="/master/add">
+    <div class="ui action input">
+        <input placeholder="First Name" type="text" name="firstname">
+        <input placeholder="Last Name" type="text" name="lastname">
         <button class="ui right icon button">
             <i class="add icon"></i>
         </button>
     </div>
 </form>
 
-{{#masters}}
-    <table class="ui table">
-        <thead>
+
+<table class="ui table">
+    <thead>
         <tr>
             <th>Propriétaire</th>
             <th>Actions</th>
-            <th></th>
         </tr>
-        </thead>
-        <tbody>
+    </thead>
+    {{#masters}}
         <tr>
             <td data-label="Propriétaire">{{firstname}} {{lastname}}
                 <div class="ui label">
-                    <i class="dog icon"></i> {{dogs.size}}
+                    <i class="dog icon count-master-dogs"></i> {{dogs.size}}
                 </div>
             </td>
-            <td data-label="Actions"></td>
-            <td></td>
+            <td data-label="Actions">
+                <form style="display:inline" method="post" action="/master/{{id}}/dog">
+                    <div class="ui action input">
+                        <input placeholder="dog name" type="text" name="dog_name">
+                        <div class="ui buttons">
+                            <button class="ui red button" value="giveup" name="dog-action">Abandonner</button>
+                            <div class="or" data-text="ou"></div>
+                            <button class="ui positive button" value="add" name="dog-action">Acquérir</button>
+                        </div>
+                    </div>
+                </form>
+                <form style="display:inline" method="get" action="/master/{{id}}/delete">
+                    <button class="ui black button delete-master"><i class="skull crossbones icon"></i>Paix à son âme
+                    </button>
+                </form>
+            </td>
         </tr>
-    </table>
-{{/masters}}
+    {{/masters}}
+</table>
+
+<h1>Chiens à l'adoption <label class="ui red left pointing label count-masters">{{dogs.size}}</label></h1>
+
+<table class="ui table">
+    <thead>
+        <tr>
+            <th>Chien</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    {{#dogs}}
+        <tr>
+            <td>{{#name}}{{.}}{{/name}}</td>
+            <td data-label="Actions">
+                <form style="display:inline" method="post" action="/dog/{{#id}}{{.}}{{/id}}/action">
+                    <div class="ui action input">
+                        <select class="ui search dropdown">
+                            {{#masters}}
+                            <option value="{{id}}">{{firstname}} {{lastname}}</option>
+                            {{/masters}}
+                        </select>
+                    </div>
+
+                    <button class="ui red icon button" value="adopt" name="dog-action">
+                        <i class="sign out alternate icon"></i>
+                    </button>
+                </form>
+            </td>
+        </tr>
+    {{/dogs}}
+</table>
 
 
 

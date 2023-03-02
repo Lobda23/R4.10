@@ -23,18 +23,23 @@ open class Master() {
     }
 
 
-    fun addDog(dog: Dog) {
-        dogs.add(dog)
+    fun addDog(dog: Dog): Boolean {
+        if (dogs.add(dog)) {
+            dog.master = this
+            return true
+        }
+        return false
     }
 
     fun giveUpDog(dog:Dog) {
+        dog.master = null
         dogs.remove(dog)
     }
 
     @PreRemove
     fun preRemove(){
         for (dog in dogs){
-            dogs.remove(dog)
+            dog.master = null
         }
     }
 }
