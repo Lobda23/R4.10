@@ -19,38 +19,38 @@
 
 <table class="ui table">
     <thead>
-        <tr>
-            <th>Propriétaire</th>
-            <th>Actions</th>
-        </tr>
+    <tr>
+        <th>Propriétaire</th>
+        <th>Actions</th>
+    </tr>
     </thead>
     {{#masters}}
-        <tr>
-            <td data-label="Propriétaire">{{firstname}} {{lastname}}
-                <div class="ui label">
-                    <i class="dog icon count-master-dogs"></i> {{dogs.size}}
-                </div>
-            </td>
-            <td data-label="Actions">
-                <form style="display:inline" method="post" action="/master/{{id}}/dog">
-                    <div class="ui action input">
-                        <input placeholder="dog name" type="text" name="dog_name">
-                        <div class="ui buttons">
-                            <button class="ui red button" value="giveup" name="dog-action">Abandonner</button>
-                            <div class="or" data-text="ou"></div>
-                            <button class="ui positive button" value="add" name="dog-action">Acquérir</button>
-                        </div>
+    <tr>
+        <td data-label="Propriétaire">{{firstname}} {{lastname}}
+            <div class="ui label count-master-dogs ">
+                <i class="dog icon"></i> {{dogs.size}}
+            </div>
+        </td>
+        <td data-label="Actions">
+            <form style="display:inline" method="post" action="/master/{{id}}/dog">
+                <div class="ui action input">
+                    <input placeholder="dog name" type="text" name="name">
+                    <div class="ui buttons">
+                        <button class="ui red button" value="give-up" name="dog-action">Abandonner</button>
+                        <div class="or" data-text="ou"></div>
+                        <button class="ui positive button" value="add" name="dog-action">Acquérir</button>
                     </div>
-                </form>
-                <form style="display:inline" method="get" action="/master/{{id}}/delete">
-                    <button class="ui black button delete-master"><i class="skull crossbones icon"></i>Paix à son âme
-                    </button>
-                </form>
-            </td>
-        </tr>
+                </div>
+            </form>
+            <form style="display:inline" method="get" action="/master/{{id}}/delete">
+                <button class="ui black button delete-master"><i class="skull crossbones icon"></i>Paix à son âme
+                </button>
+            </form>
+        </td>
+    </tr>
     {{/masters}}
     {{^masters}}
-        <p>Il n'y a pas de maître dans la base de données.</p>
+    <p>Il n'y a pas de maître dans la base de données.</p>
     {{/masters}}
 </table>
 
@@ -58,39 +58,42 @@
 
 <table class="ui table">
     <thead>
-        <tr>
-            <th>Chien</th>
-            <th>Actions</th>
-        </tr>
+    <tr>
+        <th>Chien</th>
+        <th>Actions</th>
+    </tr>
     </thead>
     {{#dogs}}
-        <tr>
-            <td>{{#name}}{{.}}{{/name}}</td>
-            <td data-label="Actions">
-                <form style="display:inline" method="post" action="/dog/{{#id}}{{.}}{{/id}}/action">
-                    <div class="ui action input">
-                        <select class="ui search dropdown" name="master">
-                            {{#masters}}
-                            <option value="{{id}}" >{{firstname}} {{lastname}}</option>
-                            {{/masters}}
-                        </select>
-                        <button class="ui right icon button" value="adopt" name="dog-action">
-                            <i class="add icon"></i>
-                        </button>
-                    </div>
-
+    <tr>
+        <td>{{#name}}{{.}}{{/name}}</td>
+        <td data-label="Actions">
+            <form style="display:inline" method="post" action="/dog/{{#id}}{{.}}{{/id}}/action">
+                <div class="ui action input">
+                    <select class="ui search dropdown" name="master">
+                        {{#masters}}
+                        <option value="{{id}}">{{firstname}} {{lastname}}</option>
+                        {{/masters}}
+                        {{^masters}}
+                        <option value="-1">Pas d'adoptant</option>
+                        {{/masters}}
+                    </select>
+                    <button class="ui right icon button" value="adopt" name="dog-action">
+                        <i class="add icon"></i>
+                    </button>
+                </div>
+                <div>
                     <button class="ui red icon button" value="remove" name="dog-action">
                         <i class="sign out alternate icon"></i>
                     </button>
-                </form>
-            </td>
-        </tr>
+                </div>
+            </form>
+        </td>
+    </tr>
     {{/dogs}}
     {{^dogs}}
-        <p>Il n'y a pas de chien à l'adoption dans la base de données.</p>
+    <p>Il n'y a pas de chien à l'adoption dans la base de données.</p>
     {{/dogs}}
 </table>
-
 
 
 {{> main/footer }}

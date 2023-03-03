@@ -39,18 +39,20 @@ class MainController {
     }
 
     @PostMapping("/master/{id}/dog")
-    fun addOrRemoveDog(@ModelAttribute("dog_name") nom: String, @ModelAttribute("dog-action") button :String, @PathVariable id: Int) : RedirectView {
+    fun addOrRemoveDog(@ModelAttribute("name") nom: String, @ModelAttribute("dog-action") button :String, @PathVariable id: Int) : RedirectView {
         if (button == "add") {
             var dog = dogRepository.save(Dog(nom))
             var master = masterRepository.findById(id).get()
             master.addDog(dog)
             dogRepository.save(dog)
         }
-        if (button == "giveup"){
+        if (button == "give-up"){
             var master = masterRepository.findById(id).get()
             var dog = dogRepository.findByNameAndMasterId(nom, id)
-            master.giveUpDog(dog)
-            dogRepository.save(dog)
+            if (dog!=null) {
+                master.giveUpDog(dog)
+                masterRepository.save(master)
+            }
         }
         return RedirectView("/")
     }
@@ -63,7 +65,7 @@ class MainController {
 
     @PostMapping("/dog/{id}/action")
     fun addNewMaster(@ModelAttribute("master") idMaster: Int, @ModelAttribute("dog-action") button :String, @PathVariable id: Int) : RedirectView {
-        if (button == "adopt") {
+        if (button == "adopt" && idMaster!=-1) {
             var dog = dogRepository.findById(id).get()
             var master = masterRepository.findById(idMaster).get()
             master.addDog(dog)

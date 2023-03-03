@@ -10,6 +10,6 @@ interface DogRepository:CrudRepository<Dog, Int>{
 
     fun findByMasterIsNull(): List<Dog>
 
-    fun findByNameAndMasterId(s: String, s1: Int): Dog
+    fun findByNameAndMasterId(s: String, s1: Int): Dog ?
 
 }

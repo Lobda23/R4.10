@@ -32,8 +32,9 @@ open class Master() {
     }
 
     fun giveUpDog(dog:Dog) {
-        dog.master = null
-        dogs.remove(dog)
+        if (dogs.remove(dog)) {
+            dog.master = null
+        }
     }
 
     @PreRemove
