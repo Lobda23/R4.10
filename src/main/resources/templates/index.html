@@ -50,7 +50,19 @@
     </tr>
     {{/masters}}
     {{^masters}}
-    <p>Il n'y a pas de maître dans la base de données.</p>
+    <tr>
+        <td colspan="2">
+            <div class="ui icon warning message">
+                <i class="exclamation circle icon"></i>
+                <div class="content">
+                    <div class="header">
+                        Pas de maître
+                    </div>
+                    <p>Il n'y a pas de maître dans la base de données.</p>
+                </div>
+            </div>
+        </td>
+    </tr>
     {{/masters}}
 </table>
 
@@ -81,7 +93,7 @@
                         <i class="add icon"></i>
                     </button>
                 </div>
-                <div>
+                <div style="display:inline">
                     <button class="ui red icon button" value="remove" name="dog-action">
                         <i class="sign out alternate icon"></i>
                     </button>
@@ -91,7 +103,19 @@
     </tr>
     {{/dogs}}
     {{^dogs}}
-    <p>Il n'y a pas de chien à l'adoption dans la base de données.</p>
+    <tr>
+        <td colspan="2">
+            <div class="ui icon positive message">
+                <i class="info circle icon"></i>
+                <div class="content">
+                    <div class="header">
+                        Pas de chien
+                    </div>
+                    <p>Il n'y a pas de chien à l'adoption dans la base de données.</p>
+                </div>
+            </div>
+        </td>
+    </tr>
     {{/dogs}}
 </table>
 
